@@ -1,0 +1,138 @@
+body {
+  background-color: #ddd;
+}
+
+.container {
+  background-color: #a1a1a1;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.box {
+  background-color: #ffffff;
+  border-radius: 4px;
+  display: flex;
+  height: 6em;
+  width: 6em;
+  margin: 1em;
+}
+
+.item {
+  background-color: black;
+  border-radius: 0.5em;
+  width: 1em;
+  height: 1em;
+  margin: 0.5em;
+}
+
+.box1 {
+  justify-content: center;
+}
+
+.box2 {
+  justify-content: flex-end;
+}
+
+.box3 {
+  align-items: center;
+}
+
+.box4 {
+  align-items: flex-end;
+}
+
+.box5 {
+  justify-content: center;
+  align-items: center;
+}
+
+.box6 {
+  justify-content: space-between;
+}
+
+.box7 {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.box8 {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box9 > .item:nth-child(2) {
+  align-self: center;
+}
+
+.box10 {
+  justify-content: space-between;
+}
+
+.box10 > .item:nth-child(2) {
+  align-self: flex-end;
+}
+
+.box11 > .item:nth-child(2) {
+  align-self: center;
+}
+
+.box11 > .item:nth-child(3) {
+  align-self: flex-end;
+}
+.box12 {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.box13 {
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+.box13 > .column {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.box14 {
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+.box14 > .column {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.box15 {
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+.box15 > .column {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+}
+.box16{
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+.box16>.row{
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+
+}
+.box16>.row:nth-child(3){
+    justify-content: space-between;
+}
+.box17{
+    flex-wrap:wrap;
+}
+.box17>.row{
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+
+}
