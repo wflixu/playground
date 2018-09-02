@@ -1,0 +1,19 @@
+{
+  "name": "TypeScript-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "_typescript@3.0.3@typescript": "^3.0.3",
+    "typescript": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^10.9.4"
+  },
+  "scripts": {
+    "dev": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
