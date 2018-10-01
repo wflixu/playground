@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/angular.js/1.4.8/angular.js"></script>
+    <title>自定义指令</title>
+    <style>
+    input.ng-invalid {
+    background-color: lightblue;
+}
+    </style>
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="myCtrl">
+        名字: <input ng-model="name">
+        <div>
+            <h2>{{name}}</h2>
+        </div>
+
+        <form  name="myForm" ng-init="myText = 'test@runoob.com'">
+            Email:
+            <input type="email" name="myAddress" ng-model="myText" required></p>
+            <h1>状态</h1>
+            {{myForm.myAddress.$valid}}
+            {{myForm.myAddress.$dirty}}
+            {{myForm.myAddress.$touched}}
+        </form>
+    </div>
+   
+</body>
+
+
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.name = "John Doe";
+    });
+</script>
+
+
+</html>

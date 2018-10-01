@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/angular.js/1.4.8/angular.js"></script>
+    <title>AngularJS Select(选择框)</title>
+    
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <select ng-init="selectedName = names[0]" ng-model="selectedName" ng-options="x for x in names">
+        </select>
+        <h2>{{selectedName}}</h2>
+    </div>
+   
+</body>
+
+
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope,$rootScope) {
+        $scope.names = ["Google", "Runoob", "Taobao"];
+    });
+</script>
+
+
+</html>

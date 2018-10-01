@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
+    <title>5-1 父子作用域</title>
+</head>
+
+<body>
+    <div ng-controller="parentCtrl">
+        <div ng-controller="childCtrl">
+            <a ng-click="sayHello()">say hello</a>
+        </div>
+        {{person}}
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('parentCtrl', function ($scope,$timeout) {
+           $scope.person = {greeted:false};
+        });
+
+        app.controller('childCtrl',function($scope){
+            $scope.sayHello=function(){
+                $scope.person.name ='ari lerner';
+            }
+        });
+
+    </script>
+</body>
+
+</html>
