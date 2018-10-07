@@ -7,27 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
-    <title>5-1 </title>
+    <title>5-2</title>
 </head>
 
 <body>
-    <div ng-controller="FirstController">
-        <h4>the simplest adding machine ever</h4>
-        <button ng-click="add(1)" class="button">Add</button>
-        <a ng-click="subtract(1)" class="button alert" >Subtract</a>
-        <h4>Current count:{{counter}}</h4>
-
+    <div ng-controller="myController">
+       <h1>{{person}}</h1>
+       and their name 
+       <h2>{{person.name}}</h2>
     </div>
     <script>
         var app = angular.module('myApp', []);
-        app.controller('FirstController', function ($scope,$timeout) {
-          $scope .counter=0;
-          $scope.add=function(amount){
-              $scope.counter+=amount;
+        app.controller('myController', function ($scope,$timeout) {
+          $scope.person={
+              name:'ari lerner'
           };
-          $scope.subtract =function(amount){
-              $scope.counter-=amount;
-          }
         });
 
         // app.controller('childCtrl',function($scope){
