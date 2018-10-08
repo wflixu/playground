@@ -20,10 +20,11 @@
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function ($scope,$parse) {
                
-            $scope.$watch('expr',function(newVal,oldVal){
+            $scope.$watch('expr',function(newVal,oldVal,scope){
+                scope.dd=12;
                 if(newVal!==oldVal){
                     var parseFun = $parse(newVal);
-                    $scope.parsedValue = parseFun({ddd:"dddddddddddddddddd"});
+                    $scope.parsedValue = parseFun(scope);
                 }
             });
         });

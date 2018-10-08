@@ -16,20 +16,34 @@
         <pre>
                 {{previewText}}
         </pre>
-        
+        <div id="emailpreview">
+            <pre>__previewText__</pre>
+        </div>
     </div>
    
 </body>
 <script>
         var app = angular.module('myApp', []);
-      
-        app.controller('myCtrl', ['$scope','$interpolate',function ($scope,$interpolate) {
-             $scope.to="kkkkk";
-             $scope.emailBody="hell {{ to }} a;lsdkf; "
+        app.config(
+            ['$interpolateProvider',function($interpolateProvider){
+                $interpolateProvider.startSymbol('__');
+                $interpolateProvider.endSymbol('__');
+            }]
+        )
+        .factory('EmailParser',['$interpolate',function($interpolate){
+            return {
+                parse:function(text,context){
+                    var template = $interpolate(text);
+                    return template(context);
+                }
+            }
+        }])
+        app.controller('myCtrl', ['$scope','EmailParser',function ($scope,EmailParser) {
+             $scope.to="dljaljsdf";
              $scope.$watch('emailBody',function(body){
                  if(body){
-                    var template = $interpolate(body);
-                     $scope.previewText=template({to:$scope.to})
+                   
+                     $scope.previewText=EmailParser.parse(body,{to:$scope.to});
                  }
              });
          }]);

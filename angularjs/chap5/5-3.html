@@ -7,28 +7,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
-    <title>5-3</title>
+    <title>5-3控制器嵌套</title>
 </head>
 
 <body>
-    <div ng-controller="myController">
-       <h1>{{person}}</h1>
-       and their name 
-       <h2>{{person.name}}</h2>
+    <div ng-controller="ParentCtroller">
+        <div ng-controller="childCtrl">
+            <a ng-click="sayHello()">say hello</a>
+        </div>
+        <h2>{{person}}</h2>
     </div>
     <script>
         var app = angular.module('myApp', []);
-        app.controller('myController', function ($scope,$timeout) {
-          $scope.person={
-              name:'ari lerner'
-          };
+        app.controller('ParentCtroller', function ($scope,$timeout) {
+             $scope.person ={
+                 greeted:false
+             }
         });
 
-        // app.controller('childCtrl',function($scope){
-        //     $scope.sayHello=function(){
-        //         $scope.person.name ='ari lerner';
-        //     }
-        // });
+        app.controller('childCtrl',function($scope){
+            $scope.sayHello=function(){
+                $scope.person.name ='ari lerner';
+            }
+        });
 
     </script>
 </body>
