@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <title>8-4自定义 指令双向数据绑定</title>
+</head>
+
+<body>
+    <div ng-controller="myCtrl">
+        <label>Their URL field:</label><input type="text" ng-model="theirUrl">
+        <div my-directive some-attr="theirUrl" my-link-text="Click me to go to Google"></div>
+    </div>
+
+</body>
+<script>
+    var app = angular.module('myApp', []);
+
+
+    app.directive('myDirective', function () {
+        return {
+            restrict: 'A',
+            replace: true,
+            scope: {
+                myUrl: '=someAttr', // 经过了修改   
+                myLinkText: '@'
+            },
+            template: `\   
+                <div>\       
+                  <label > My Url Field:</label >\  
+                         <input type="text"\ ng-model="myUrl" />\            
+                         <a href="{{myUrl}}">{{ myLinkText }}</a>\       
+                          </div>\
+                          `
+        };
+    });
+
+    app.controller('myCtrl', ['$scope', '$filter', function ($scope, $filter) {
+        $scope.theirUrl = "https://www.baidu.com";
+    }]);
+
+
+
+</script>
+
+</html>

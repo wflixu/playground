@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <title>9-1 内置指令</title>
+</head>
+
+<body>
+    <div ng-controller="myCtrl">
+        <h1>1. ng-disabled</h1>
+        <input type="text" ng-model="someProperty" placeholder="TypetoEnable">
+        <button ng-model="button" ng-disabled="!someProperty">AButton</button>
+        <textarea ng-disabled="isDisabled">Wait5seconds</textarea>
+
+        <h1>readonly</h1>
+        Type here to make sibling readonly:<input type="text" ng-model="someProperty">
+        <input type="text" ng-readonly="someProperty"
+            value="Some text here" />
+    </div>
+
+</body>
+<script>
+    var app = angular.module('myApp', []);
+    app.run(function ($rootScope, $timeout) {
+        $rootScope.isDisabled = true;
+        $timeout(function () {
+            $rootScope.isDisabled = false;
+        }, 5000);
+    });
+
+    app.controller('myCtrl', ['$scope', '$filter', function ($scope, $filter) {
+        $scope.someProperty = true;
+        $scope.button = "lalal";
+        $scope.isDis = true;
+
+    }]);
+
+
+</script>
+
+</html>
