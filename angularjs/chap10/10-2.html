@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <title>10-1 指令配置 priority terminal </title>
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <div ng-controller="LotteryController">
+  
+        <div  my-restrict my-priority>
+            
+        </div>
+    </div>
+
+</body>
+<script>
+    angular.module('myApp', [])
+        .directive('myRestrict', function () {
+            return {
+                restrict: 'A',
+                priority:50,
+                terminal:true,
+                template: 'HELLO WORLD'
+            }
+        }).directive('myPriority', function () {
+            return {
+                restrict: 'A',
+                priority:10,
+                link:function(){
+                    console.log('sub test')
+                }
+            }
+        })
+        .controller('LotteryController', function ($scope) {
+            $scope.generateNumber = function () {
+                return Math.floor((Math.random() * 10) + 1);
+            };
+        });
+</script>
+
+</html>

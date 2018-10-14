@@ -6,31 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="./../lib/angular.js"></script>
-    <title>9-8 ng-repeat </title>
+    <title>9-9 ng-click </title>
     <style>
-        input.ng-invalid {    border: 1px solid red;}input.ng-valid {    border: 1px solid green;}
+        input.ng-invalid {
+            border: 1px solid red;
+        }
+
+        input.ng-valid {
+            border: 1px solid green;
+        }
     </style>
 </head>
 
 <body>
-    <form name="signup_form" ng-controller="FormController" ng-submit="submitForm()" novalidate>
-        <div ng-repeat="field in fields" ng-form="signup_form_input">
-            <input type="text" name="dynamic_input" ng-required="field.isRequired" ng-model="field.name" placeholder="{{field.placeholder}}" />
 
-            <div ng-show="signup_form_input.dynamic_input.$dirty &&signup_form_input.dynamic_input.$invalid">
-                <span class="error" ng-show="signup_form_input.dynamic_input.$error.required"> The field is required.
-                </span>
-            </div>
-        </div>
-        <button type="submit" ng-disabled="signup_form.$invalid"> Submit All </button>
-    </form>
+    <div ng-controller="CounterController"> <button ng-click="count = count + 1" ng-init="count=0"> Increment
+
+        </button> count: {{ count }} <button ng-click="decrement()"> Decrement </button>
+        <div>
+
+
 </body>
 <script>
-    angular.module('myApp', []).controller('FormController', function ($scope) {
-        $scope.fields = [{ placeholder: 'Username', isRequired: true }, { placeholder: 'Password', isRequired: true }, { placeholder: 'Email (optional)', isRequired: false }]; $scope.submitForm = function () {
-            alert("it works!");
+    angular.module('myApp', []).controller('CounterController', function ($scope) {
+        $scope.decrement = function () {
+        $scope.count = $scope.count - 1;
         };
-    });
+    })
 </script>
 
 </html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <title>10-6 transclude </title>
+    <style>
+    </style>
+</head>
+
+<body>
+            <div sidebox title="Links">
+                    <ul>
+                        <li>First link</li>
+                        <li>Second link</li>
+                    </ul>
+                </div>
+                <div sidebox title="TagCloud">
+                    <div class="tagcloud"> 
+                        <a href="">Graphics</a> 
+                        <a href="">AngularJS</a>
+                         <a href="">D3</a> 
+                         <a href="">Front-end</a>
+                        <a href="">Startup</a>
+                    </div>
+                </div>
+    
+
+</body>
+<script>
+     angular.module('myApp', [])
+    .directive('sidebox', function () {
+        return {
+            restrict: 'EA', scope: { title: '@' }, transclude: true, template: '<div class="sidebox">\
+                    <div class="content">\
+                       <h2 class="header">{{ title }}</h2>\
+                           <span class="content" ng-transclude>\
+                        </span>\
+                        </div>\
+                 </div>'
+        };
+    });
+</script>
+
+</html>

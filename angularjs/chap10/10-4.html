@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <title>10-4 指令配置 指令作用域 scope true </title>
+    <style>
+    </style>
+</head>
+
+<body>
+
+
+    <div ng-init="someProperty = 'some data'"></div>
+    <div ng-init="siblingProperty = 'more data'">
+        Inside Div Two: {{ aThirdProperty }}
+        <div ng-init="aThirdProperty = 'data for 3rd property'" ng-controller="SomeCtrl">
+            Inside Div Three: {{ aThirdProperty }}
+            <div ng-controller="SecondCtrl">
+                Inside Div Four: {{ aThirdProperty }}
+                <br>
+                Outside myDirective: {{ myProperty }}
+                <div my-directive ng-init="myProperty = 'wow, this is cool'">
+                    Inside myDirective: {{ myProperty }}
+                    <div>
+                    </div>
+                </div>
+            </div>
+</body>
+<script>
+    angular.module('myApp', [])
+        .controller('SomeCtrl', function ($scope) {
+            // we can leave it empty, it just needs to be defined
+        })
+        .controller('SecondCtrl', function ($scope) {
+            // also can be empty
+        })
+        .directive('myDirective', function () {
+            return {
+                restrict: 'A',
+                scope: true
+            }
+        })
+</script>
+
+</html>
