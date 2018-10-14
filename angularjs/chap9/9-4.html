@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <title>9-3指令中的子作用域 ng-controller</title>
+</head>
+
+<body>
+
+    <div ng-controller="SomeController">
+        {{ someModel.someProperty }} <button ng-click="someAction()">Communicate</button></div>
+</body>
+<script>
+    angular.module('myApp',
+        []).controller('SomeController', function ($scope) { //创建模型
+            $scope.someModel = { // 添加属性
+                someProperty: 'hellocomputer'
+            } // 设置$scope自身的操作
+            $scope.someAction = function () {
+                $scope.someModel.someProperty = 'hello human';
+            };
+        });
+
+</script>
+
+</html>

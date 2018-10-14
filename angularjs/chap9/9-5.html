@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <title>9-4指令中的子作用域 ng-controller</title>
+</head>
+
+<body>
+    <div ng-controller="SomeController"> {{ someBareValue }}
+        <button ng-click="someAction()">Communicate to child</button>
+
+        <div ng-controller="ChildController"> {{ someBareValue }} <button ng-click="childAction()">Communicate to
+                parent</button>
+        </div>
+    </div>
+</body>
+<script>
+    angular.module('myApp', []).controller('SomeController', function ($scope) {    // 反模式，裸值    
+        $scope.someBareValue = 'hello computer';    // 设置 $scope 本身的操作，这样没问题  
+        $scope.someAction = function () {        // 在SomeController和ChildController中设置 { someBareValue } } 
+            $scope.someBareValue = 'hello human, from parent';
+        };
+    }).controller('ChildController', function ($scope) {
+        $scope.childAction = function () {        // 在ChildController中设置 { { someBareValue } }
+            $scope.someBareValue = 'hello human, from child';
+        };
+    });
+</script>
+
+</html>

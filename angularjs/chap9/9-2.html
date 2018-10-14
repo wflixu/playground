@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <title>9-2布尔类型 内置指令</title>
+</head>
+
+<body>
+
+    <h2>ng-href</h2>
+    <p>
+        <a ng-href="{{ myHref }}">I'm feeling lucky, when I load</a>
+        <br>
+        <!-- 用户单击之前，href不会加载 -->
+        <a href="{{ myHref }}">I'm
+            feeling 404</a>
+    </p>
+    <h2>ng-src</h2>
+    <p>
+        <h3>WrongWay</h2><img src="{{imgSrc}}" />
+            <h3>Rightway</h3><img ng-src="{{imgSrc}}" />
+    </p>
+
+
+</body>
+<script>
+    var app = angular.module('myApp', []);
+    app.run(function ($rootScope, $timeout) {
+
+        $timeout(function () { $rootScope.myHref = 'http://baidu.com'; }, 2000);
+
+        $timeout(function () {
+            $rootScope.imgSrc = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539485246945&di=f1e4adfd2c541efcde8e253e0c0cc869&imgtype=jpg&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2F42166d224f4a20a4de339ff89c529822720ed0e4.jpg';
+        }, 2000);
+    });
+
+
+</script>
+
+</html>
