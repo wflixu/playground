@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <script src="./../lib/angular-route.js"></script>
+    <title> 14-1服务 </title>
+</head>
+
+<body>
+    <div ng-controller="ServiceController">
+        <label for="username"> Type in a GitHub username </label> <input type="text" ng-model="username" placeholder="Enter a GitHub username" />
+        <ul>
+            <li ng-repeat="event in events">
+                <!--            event.actor and event.repo are returned       
+                         by the github API. To view the raw 
+                                    API, uncomment the next line:        -->
+                <!-- {{ event | json }} -->
+                {{ event.actor.login }} {{ event.repo.name }} </li>
+        </ul>
+    </div>
+</body>
+<script>
+    angular.module('myApp.services', [])
+        .factory('githubService', function ($http) {
+            var githubUrl = 'https://api.github.com';
+            var githubUsername;
+            var runUserRequest = function (path) { // 从使用JSONP调用Github
+                // API的$http服务中返回promise
+                return $http({
+                    method: 'JSONP',
+                    url: githubUrl + '/users/' + githubUsername + '/' + path + '?callback=JSON_CALLBACK'
+                });
+            }; // 返回带有一个events函数的服务对象
+            return {
+                events: function () {
+                    return runUserRequest('events');
+                },
+                setUsername: function (username) {
+                    githubUsername = username;
+                }
+            };
+        });
+    angular.module('myApp', ['myApp.services'])
+        .controller('ServiceController',
+            function ($scope, $timeout, githubService) { // 我们可以调用对象的事件函数
+                $scope.events = githubService.events('auser');
+                var timeout;
+
+                $scope.$watch('username', function (newUsername) {        // 从使用JSONP调用Github API的$http服务中返回promise       
+                    if (newUsername) {
+                        if (timeout) {
+                            $timeout.cancel(timeout);
+                        }
+                        timeout = $timeout(function (newUserName) {
+                            githubService.events(newUserName)
+                                .success(function (data, status) {
+                                    console.log('data', data);
+
+                                    $scope.events = data.data;
+                                });
+                        }, 350)
+                    }
+                });
+            });
+</script>
+
+</html>

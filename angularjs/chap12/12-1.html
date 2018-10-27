@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <script src="./../lib/angular-route.js"></script>
+    <title>12-1 angular-router </title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>header</h2>
+    </header>
+    <div class="content">
+        <div ng-view></div>
+    </div>
+    <footer>
+        <h5>footer</h5>
+    </footer>
+
+</body>
+<script>
+    angular.module('myApp', ["ngRoute"])
+        .config(['$routeProvider', function ($routeProvider) {
+            $routeProvider.when(
+                '/', {
+                    templateUrl: 'views/home.html',
+                    controller: 'HomeController'
+                })
+                .when('/login/:user',
+                    {
+                        templateUrl: 'views/login.html',
+                        controller: 'LoginController'
+                    })
+                .when('/dashboard', {
+                    templateUrl: 'views/dashboard.html',
+                    controller: 'DashboardController',
+                    resolve: {
+                        user: function (SessionService) {
+                            return SessionService.getCurrentUser();
+                        }
+                    }
+                }).otherwise({ redirectTo: '/' });
+        }])
+        .run(['$rootScope', '$location',
+            function ($rootScope, $location) {
+                $rootScope.$on('$routeChangeStart', function (evt, next, current) { 
+                   console.log('evt',evt);
+                   console.log('next',next);
+                   console.log('current',current);
+                   
+                });
+            }])
+        .controller('HomeController', function ($scope, $location) {
+            // also can be empty
+            $scope.content = "lorem   lsjdfjj";
+            $scope.btnfn = function () {
+                // alert($scope.content);
+                // console.log($location);
+                // $location.path('/login/name')
+                var url = $location.absUrl();
+                console.log(url);
+                console.log('hash', $location.hash());
+                console.log('host', $location.host());
+                console.log('port', $location.port());
+                console.log('protocol', $location.protocol());
+                console.log('url', $location.url());
+                $location.search({ name: 'Ari', username: 'auser' });
+
+
+            }
+
+        })
+        .controller('LoginController', function ($scope, $routeParams, $location) {
+            // also can be empty
+            console.log($routeParams.user)
+            $scope.btn = function () {
+                $location.path('/home');
+            }
+
+        })
+        .controller('DashboardController', function ($scope) {
+            // also can be empty
+        })
+
+</script>
+
+</html>

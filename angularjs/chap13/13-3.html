@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <script src="./../lib/angular-route.js"></script>
+    <title> 13-3$injector  API </title>
+</head>
+
+<body>
+    <div ng-controller="MyController">
+        <button ng-click="sayHello()">Hello</button>
+    </div>
+
+</body>
+<script>
+    function greeterService() {
+        return {
+            greet: function (msg) {
+                alert(msg);
+            }
+        }
+
+    }
+
+
+    var aControllerFactory = function ($scope, greeter) {
+        console.log("LOADED controller", greeter);    // ……控制器
+        $scope.sayHello = function () {
+            greeter.greet('hello');
+        }
+
+    };
+    aControllerFactory.$inject = ['$scope', 'greeter']; // Greeter服务
+    console.log("greeter service");// 我们应用的控制器
+    angular.module('myApp', [])
+        .controller('MyController', aControllerFactory)
+        .factory('greeter', greeterService);// 获取注入器并创建一个新的作用域
+
+    var injector = angular.injector(['ng', 'myApp']);
+    console.log('injector', injector);
+
+    console.log('annotate',injector.annotate(function($q,greeter){}));
+    
+
+    var controller = injector.get('$controller');
+    console.log('controller',controller);
+    
+    var rootScope = injector.get('$rootScope');
+    var newScope = rootScope.$new();// 调用控制器
+    // controller('MyController', { $scope: newScope });
+
+
+
+
+</script>
+
+</html>
