@@ -29,6 +29,17 @@
             }
         };
     })
+    .controller('MyController',function($scope,UserService){
+           $scope.sayHello=function(){
+            if (!UserService.getCurrentUser()) {
+                UserService.setCurrentUser('tom')
+                console.log('set user tom');
+            } else {
+                alert('hello:' + UserService.getCurrentUser())
+            }
+
+           }
+    })
 </script>
 
 </html>
