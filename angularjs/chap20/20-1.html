@@ -32,18 +32,26 @@
                         console.log('click in child component');
                         scope.$emit('post',{info:'test evetn emit'})
                     }
+                    scope.$on('dive',function(evt){
+                        console.log(' trigger dive',evt);
+                        
+                    })
                 }
             }
         })
         .directive('hello', function () {
             return {
                 restrict: 'AE',
-                template: '<child></child>',
+                template: '<button ng-click="test()">broadcase</button> <child></child>',
                 scope: {
 
                 },
                 link: function (scope, element, attrs, ctrl) {
                     console.log('11111');
+                   scope.test=function (){
+                       scope.$broadcast('dive',{change:2.33})
+                   }
+                    
                     
                    scope.$on('post',function(evt){
                        console.log('post in link ',evt);
@@ -53,6 +61,7 @@
                 controller: function ($scope, $element, $attrs, $transclude) {
                     console.log('22222');
                     console.log('scope',$scope);
+                    console.log('name',$scope.name);
                     
                     
                     $scope.$on('post', function (evt) {

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../lib/angular.js"></script>
+    <script src="./../lib/angular-route.js"></script>
+    <title>16-1 jsonp </title>
+</head>
+
+<body>
+    <div ng-controller="MyController">
+        <button ng-click="sayHello()">Hello</button>
+    </div>
+</body>
+
+<script>
+    angular.callbacks._0({
+        'meta': { 'X-RateLimit-Limit': '60', 'status': 200 }, 'data': {
+            'current_user_url': 'https://api.github.com/user'
+        }
+    })
+    angular.module('myApp', [])
+
+        .config(function ($httpProvider) {
+            $httpProvider.interceptors.push('myInterceptor');
+
+            $httpProvider.default.headers.common['X-Resquested-By'] = 'myangular app';
+            $httpProvider.default.headers.common['X-Auth'] = 'randomString';
+            $httpProvider.default.headers.put['X-Auth'] = 'randomString';
+        })
+        .controller('MyController', function ($scope, apiKey) {
+            $scope.sayHello = function () {
+                alert(apiKey);
+            }
+        })
+</script>
+
+</html>
