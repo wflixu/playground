@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>text-overflow</title>
+    <style>
+      html,
+      body {
+        background-color: #f1f1f1;
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+      }
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #fff;
+      }
+      .sort {
+        padding-right: 5px;
+        position: relative;
+      }
+      .sort::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 10px;
+        bottom: 5px;
+        width: 0;
+        height: 0;
+        box-sizing: border-box;
+        border-top: 5px solid #999;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+      }
+      .sort::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: 5px;
+        box-sizing: border-box;
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid #999;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+      }
+      .sort.flow::before{
+          left:auto;
+          right:5px;
+      }
+      .sort.flow::after{
+          left:auto;
+          right:5px;
+      }
+      table {
+        width: 100%;
+        word-wrap: break-word;
+         word-break: break-all;
+         table-layout:fixed;
+      }
+      table th {
+        overflow: hidden;
+        height:40px;
+        line-height: 40px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        background-color: #e1e1e1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>text-overflow</h1>
+     
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th style="width:70px;">name<span class="sort"></span></th>
+            <th>age</th>
+            <th>agender</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>tom</td>
+            <td>21</td>
+            <td>man</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

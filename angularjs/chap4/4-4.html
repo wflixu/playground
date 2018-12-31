@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
+    <title>4-4 </title>
+</head>
+
+<body>
+    <div ng-controller="myCtrl">
+        <input type="text" my-tag ng-model="name" />
+        <Strong>ModelValue:{{name}}</Strong>
+        <input type="text" ng-model="newName" />
+        <button ng-click="changeName()">ChangeName</button>
+        </div>
+    <script>
+            var app = angular.module('myApp', []);
+    
+
+         app.controller('myCtrl', function($scope){
+            $scope.name = 'kobe';
+            $scope.changeName = function(){
+                $scope.name = $scope.newName;
+            }
+        });
+        app.directive('myTag', function(){
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function(scope, ele, attrs, ctrl){
+                    ctrl.$parsers.push(function(value){
+                        value = value.toUpperCase();
+                        return value;
+                    });
+                    ctrl.$formatters.push(function(value){
+                        console.log('$formatters方法被调用');
+                        value = value.toUpperCase();
+                        return value;
+                    });
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,31 @@
+{
+  "devDependencies": {
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.2"
+  },
+  "name": "chap19",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "_fs-access@1.0.1@fs-access": "^1.0.1",
+    "_isexe@2.0.0@isexe": "^2.0.0",
+    "_karma-chrome-launcher@2.2.0@karma-chrome-launcher": "^2.2.0",
+    "_karma-jasmine@1.1.2@karma-jasmine": "^1.1.2",
+    "_which@1.3.1@which": "^1.3.1",
+    "_null-check@1.0.0@null-check": "^1.0.0",
+    "fs-access": "^1.0.1",
+    "isexe": "^2.0.0",
+    "which": "^1.3.1",
+    "null-check": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
