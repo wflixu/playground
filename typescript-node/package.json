@@ -4,8 +4,9 @@
   "description": "",
   "types": "lib/index",
   "main": "lib/index",
-  "scripts": {
+  "scripts": { 
     "start": "npm run build:live",
+     "div":"tsc --w",
     "build:live":"nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts"
   },
   "keywords": [],
