@@ -1,54 +1,47 @@
 import * as React from "react";
-interface ICount {
-    value: number;
-    onIncrement: any;
-    onDecrement: any
+import { connect } from 'react-redux';
+import { increment, decrement } from './../actions'
+
+interface IProps{
+    count:number;
+    increment():void;
+    decrement():void;
+}
+const mapStateToProps = (state: { count: any; } /*, ownProps*/) => {
+    return {
+        count: state.count
+    }
 }
 
-export default class Counter extends React.Component<ICount, {}>{
-    constructor(props: ICount) {
-        // tslint:disable-next-line:no-console
-        console.log(props);
-        super(props);
-        this.incrementAsync = this.incrementAsync.bind(this);
-        this.incrementIfOdd = this.incrementIfOdd.bind(this);
-    }
-
-    incrementIfOdd() {
-        if (this.props.value % 2 !== 0) {
-            this.props.onIncrement()
-        }
-    }
-
-    incrementAsync() {
-        setTimeout(this.props.onIncrement, 1000)
-    }
+const mapDispatchToProps = { increment, decrement }
 
 
+class Counter extends React.Component<IProps,{}>{
+ 
     render() {
         return (
             <div className="container">
-                <span>  Clicked: {this.props.value} times
-        {' '}</span>
-
-                <button className="btn btn-primary col-1" onClick={()=> this.props.onIncrement()}>
+                <span>  Clicked: {this.props.count} times</span>
+                <button className="btn btn-primary col-1" onClick={() => this.props.increment()}>
                     +
         </button>
-                {' '}
-                <button className="btn btn-primary col-1" onClick={()=>this.props.onDecrement()}>
+
+                <button className="btn btn-primary col-1" onClick={() => this.props.decrement()}>
                     -
         </button>
-                {' '}
-                <button className="btn btn-primary col-1" onClick={this.incrementIfOdd}>
-                    Increment if odd
-        </button>
-                {' '}
-                <button className="btn btn-primary col-1" onClick={this.incrementAsync}>
-                    Increment async
-        </button>
+
             </div>
         )
     }
 
+}
 
-}  
+
+
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Counter);
+
