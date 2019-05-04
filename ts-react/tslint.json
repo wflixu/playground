@@ -1,4 +1,15 @@
 {
+  "rules":{
+    "ordered-imports": false,
+    "prefer-const": false,
+    "interface-name": [false, "never-prefix"],
+    "member-ordering": [false, {"order": "fields-first"}],
+    "no-shadowed-variable": false,
+    "member-access": false,
+    "jsx-no-lambda":false,
+    "console.log":false,
+    "no-console": [false, "log", "warn"]
+  },
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "linterOptions": {
     "exclude": [
