@@ -2,12 +2,12 @@ import * as React from 'react';
 
 interface Props {
   count: number;
-  increment: (amount:number) => void;
-  decrement:(amount:number)=>void;
+  increment: (amount:number) => any;
+  decrement:(amount:number)=>any;
 }
 
 export const FCCounter: React.FC<Props> = props => {
-  const { count, increment ,decrement } = props;
+  const {  count, increment ,decrement } = props;
 
   const handleIncrement = () => {
     increment(1);
@@ -22,7 +22,7 @@ export const FCCounter: React.FC<Props> = props => {
         {`decrement`}
       </button>
       <span>
-        {label}: {count}
+        counter: {count}
       </span>
       <button type="button" onClick={handleIncrement}>
         {`Increment`}
