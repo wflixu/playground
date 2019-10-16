@@ -1,0 +1,55 @@
+
+
+<template id="">
+
+    <style>
+    
+    ::content li {
+    
+      display: inline-block;
+    
+      padding: 20px 10px;
+    
+    }
+    
+    </style>
+    
+    <content select="ul"></content>
+    
+    </template>
+    
+    <script>
+    
+    (function() {
+    
+      const element = Object.create(HTMLInputElement.prototype)
+    
+      const template = document.currentScript.ownerDocument.querySelector('template')
+    
+     
+    
+      element.createdCallback = function() {
+    
+        const shadowRoot = this.createShadowRoot()
+    
+        const clone = document.importNode(template.content, true)
+    
+        shadowRoot.appendChild(clone)
+    
+     
+    
+        this.addEventListener('click', function(event) {
+    
+          console.log(event.target.textContent)
+    
+        })
+    
+      }
+    
+     
+    
+      document.registerElement('test-header', { prototype: element })
+    
+    })()
+    
+    </script>
