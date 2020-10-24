@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation 实现不间断播报</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="ul">
+            <div class="li">小刘同学加入了凹凸实验室</div>
+            <div class="li">小邓同学加入了凹凸实验室</div>
+            <div class="li">小李同学加入了凹凸实验室</div>
+            <div class="li">小王同学加入了凹凸实验室</div>
+            <!--   插入用于填充的数据数据 -->
+            <div class="li">小刘同学加入了凹凸实验室</div>
+        </div>
+        
+    </div>
+    <style>
+        @keyframes scroll {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(0, -200px);
+            }
+        }
+        .wrap {
+            height: 40px;
+            width:400px;
+            border-radius:5px;
+            background-color: burlywood;
+            color: white;
+        }
+        .ul {
+            animation-delay:1s;
+            animation-name: scroll;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            /* animation: scroll 5s linear infinite; 动画属性简写 */
+        }
+
+        .li {
+            height: 40px;
+            font-size: 16px;
+        }
+    </style>
+
+</body>
+
+</html>
